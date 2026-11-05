@@ -1,0 +1,19 @@
+== git log (first 3 commits, event window evidence) ==
+7829711 2026-11-05 21:10:21 +0000 App: server, same-origin proxy, home/workspace/batch UI, demo shop, live fix mode, rule-level scoring
+47f1c36 2026-11-05 20:54:45 +0000 Core engine: WCAG color math, 24 rules, tab order, reading order, scoring, simulations + 39 unit tests
+5d6109f 2026-11-05 20:40:49 +0000 Scaffold: package, license, decisions log
+fcbc257 2026-11-05 21:18:41 +0000 Screenshots in docs/, batch copy + bar fill fix
+9f0b634 2026-11-05 21:17:16 +0000 Corpus pipeline: 50 real homepages audited headlessly, results committed + README/CREDITS
+33579d5 2026-11-05 21:13:58 +0000 E2E suite (13 specs) + fixed-rules session record in live fix mode
+
+== first commit date ==
+2026-11-05 20:40:49 +0000
+== secret scan (expect no output between markers) ==
+--BEGIN--
+./src/workspace.js:88:  const token = ++loadToken;
+./src/workspace.js:98:  if (token !== loadToken) return; // a newer load superseded this scan
+./src/engine/rules.js:222:    fix: () => ({ summary: 'Add the standard autocomplete token.', code: '<input type="email" autocomplete="email">' }),
+./CHECKLIST.md:16:| No secrets committed | ✅ | compliance/COMPLIANCE.md (grep evidence) |
+--END--
+== .env files ==
+0

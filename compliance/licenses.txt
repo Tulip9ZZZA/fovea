@@ -1,0 +1,4 @@
+fovea@1.0.0 /home/z/my-project/fovea
+└── express@4.22.3
+
+express: MIT (https://spdx.org/licenses/MIT.html), @playwright/test: Apache-2.0 (https://spdx.org/licenses/Apache-2.0.html)

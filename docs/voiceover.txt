@@ -1,0 +1,53 @@
+Fovea demo voiceover — 2:47 tape (matches docs/demo-script.md beats 1:1)
+Read at a natural pace (~145 wpm). Bracketed cues are beat numbers, not spoken.
+Per-beat word budgets assume ~2.4 words/sec; pauses live in the gaps.
+================================================================================
+
+[1 — 0:00 — 23 words]
+Ninety-five point nine percent of the top million websites have accessibility
+failures. This shop looks fine — to you. Watch what Fovea sees.
+
+[2 — 0:11 — 21 words]
+One click, and every failure is x-rayed: forty-two violations, stamped on
+the real elements, with an access score of sixty-six.
+
+[3 — 0:21 — 54 words]
+This search field has no label — a screen reader just says "edit text".
+This cart button has no name at all. This link opens a new window without
+warning. This card reacts to clicks but is unreachable by keyboard. And this
+banner hides focusable buttons from assistive tech — focus lands on silence.
+
+[4 — 0:43 — 58 words]
+Now step into your users' shoes. One point three billion people live with a
+disability. Protanopia: one in twelve men can't tell these states apart.
+Low vision: the blur most of us will need eventually. Keyboard-only:
+everything but the tab path goes dark — and the deal card jumps to stop
+number one, because a positive tab index broke the whole order.
+
+[5 — 1:09 — 13 words]
+The score is not a black box — every deduction is spelled out.
+
+[6 — 1:19 — 47 words]
+And this isn't a toy demo. Type any real URL: Fovea fetches it through a
+same-origin proxy, strips the scripts, and renders it in a sandboxed frame —
+so we can read the exact computed styles the browser really uses.
+
+[7 — 1:41 — 28 words]
+debian.org, audited live. One DOM walk builds element snapshots; twenty-four
+WCAG-aligned rules run as pure functions; the same code powers the app, the
+tests, and the crawler.
+
+[8 — 1:53 — 10 words]
+Back to the shop. Now we fix it — live.
+
+[9 — 1:59 — 45 words]
+Labels, button names, the unnamed link, and every contrast failure: the score
+climbs with each fix, and the sandboxed copy changes on screen. Each fix also
+ships as a copy-paste snippet for the real codebase.
+
+[10 — 2:33 — 33 words]
+Language, title, pinch-to-zoom — sixty-six to eighty-nine. Fovea: see what
+your users see, fix what they can't use. Built in one weekend for Next Byte
+Hacks V5 — fully local, zero API keys, MIT licensed.
+================================================================================
+Total ≈ 332 words ≈ 2:16 of speech across a 2:47 tape — pauses fit inside the gaps.

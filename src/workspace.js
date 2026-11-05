@@ -145,6 +145,10 @@ function renderDial(score) {
   $('fixCount').textContent = state.fixCount;
 }
 
+function escapeHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 function renderViolations() {
   const r = state.result;
   const list = $('vlist');
@@ -160,11 +164,11 @@ function renderViolations() {
     const openSameRule = open.filter(x => x.ruleId === v.ruleId).length;
     item.innerHTML = `
       <div class="vrow">
-        <span class="vt">${v.title}</span>
+        <span class="vt">${escapeHtml(v.title)}</span>
         <span class="chip ${v.severity}">${v.severity}</span>
       </div>
-      <div class="vs">${v.why}${extra ? ` — <b>${extra}</b>.` : ''}</div>
-      <div class="sel">${v.selector} · WCAG ${v.wcag}</div>
+      <div class="vs">${escapeHtml(v.why)}${extra ? ` — <b>${extra}</b>.` : ''}</div>
+      <div class="sel">${escapeHtml(v.selector)} · WCAG ${escapeHtml(v.wcag)}</div>
       <div class="actions">
         <button class="btn small ghost" data-act="locate">Locate</button>
         ${canFix(v.ruleId) ? `<button class="btn small primary" data-act="fix">Fix all${openSameRule > 1 ? ` (${openSameRule})` : ''}</button>` : ''}
@@ -183,7 +187,7 @@ function renderViolations() {
     item.className = 'vitem fixed';
     item.innerHTML = `
       <div class="vrow">
-        <span class="vt">${rule ? rule.title : ruleId}</span>
+        <span class="vt">${escapeHtml(rule ? rule.title : ruleId)}</span>
         <span class="fixedbadge">✓ fixed live</span>
       </div>
       <div class="vs">${n} instance${n === 1 ? '' : 's'} corrected in this session — re-scan is clean for this rule.</div>`;
@@ -357,10 +361,6 @@ function renderTranscript() {
     more.textContent = `… and ${lines.length - 120} more`;
     body.appendChild(more);
   }
-}
-
-function escapeHtml(s) {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 function resetSession() {
