@@ -1,0 +1,858 @@
+{
+ "crawledAt": "2026-11-05T21:15:56.089Z",
+ "seedCount": 50,
+ "okCount": 50,
+ "failCount": 0,
+ "violationTotals": {
+  "heading-empty": 177,
+  "contrast": 142,
+  "aria-hidden-focus": 634,
+  "html-no-lang": 6,
+  "iframe-no-title": 11,
+  "target-blank": 420,
+  "link-vague-text": 23,
+  "button-no-name": 16,
+  "img-link-no-name": 44,
+  "duplicate-id": 22,
+  "input-no-label": 39,
+  "heading-order": 9,
+  "no-h1": 11,
+  "table-no-header": 5,
+  "positive-tabindex": 1,
+  "obsolete-element": 1,
+  "autocomplete-missing": 2,
+  "img-no-alt": 47,
+  "click-div": 26,
+  "label-orphan": 15,
+  "svg-no-name": 11
+ },
+ "ruleNames": {
+  "img-no-alt": "Image has no alt attribute",
+  "img-link-no-name": "Linked image has no accessible name",
+  "contrast": "Text contrast below WCAG AA",
+  "input-no-label": "Form field has no label",
+  "button-no-name": "Button has no accessible name",
+  "link-vague-text": "Vague link text",
+  "heading-order": "Heading level skipped",
+  "no-h1": "Page has no main heading (h1)",
+  "heading-empty": "Empty heading",
+  "html-no-lang": "Page language not declared",
+  "title-missing": "Page has no <title>",
+  "iframe-no-title": "Iframe has no title",
+  "positive-tabindex": "Positive tabindex overrides natural order",
+  "label-orphan": "Label points to nothing",
+  "duplicate-id": "Duplicate id",
+  "viewport-zoom": "Pinch-to-zoom disabled",
+  "autocomplete-missing": "Email field without autocomplete",
+  "table-no-header": "Data table without header cells",
+  "target-blank": "Link opens a new window without warning",
+  "obsolete-element": "Obsolete element",
+  "click-div": "Clickable element not keyboard reachable",
+  "aria-hidden-focus": "Focusable element inside aria-hidden",
+  "svg-no-name": "Meaningful SVG has no accessible name"
+ },
+ "failures": [],
+ "pages": [
+  {
+   "ok": true,
+   "url": "https://www.gov.uk/",
+   "title": "Welcome to GOV.UK",
+   "score": 94,
+   "grade": "A",
+   "counts": {
+    "critical": 1,
+    "serious": 1,
+    "moderate": 0,
+    "minor": 27
+   },
+   "total": 29,
+   "topRule": "aria-hidden-focus",
+   "requestedUrl": "https://www.gov.uk/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.un.org/",
+   "title": "ERROR: The request could not be satisfied",
+   "score": 97,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 1,
+    "moderate": 0,
+    "minor": 0
+   },
+   "total": 1,
+   "topRule": "html-no-lang",
+   "requestedUrl": "https://www.un.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.who.int/",
+   "title": "World Health Organization (WHO)",
+   "score": 98,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 1,
+    "minor": 25
+   },
+   "total": 26,
+   "topRule": "iframe-no-title",
+   "requestedUrl": "https://www.who.int/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.usa.gov/",
+   "title": "Making government services easier to find | USAGov",
+   "score": 95,
+   "grade": "A",
+   "counts": {
+    "critical": 3,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+   },
+   "total": 3,
+   "topRule": "button-no-name",
+   "requestedUrl": "https://www.usa.gov/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.unicef.org/",
+   "title": "UNICEF, for every child",
+   "score": 80,
+   "grade": "B",
+   "counts": {
+    "critical": 16,
+    "serious": 6,
+    "moderate": 7,
+    "minor": 35
+   },
+   "total": 64,
+   "topRule": "aria-hidden-focus",
+   "requestedUrl": "https://www.unicef.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.oecd.org/",
+   "title": "Just a moment...",
+   "score": 99,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 1
+   },
+   "total": 1,
+   "topRule": "no-h1",
+   "requestedUrl": "https://www.oecd.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.coe.int/",
+   "title": "Attention Required! | Cloudflare",
+   "score": 99,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 1
+   },
+   "total": 1,
+   "topRule": "target-blank",
+   "requestedUrl": "https://www.coe.int/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.w3.org/",
+   "title": "W3C",
+   "score": 96,
+   "grade": "A",
+   "counts": {
+    "critical": 1,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 4
+   },
+   "total": 5,
+   "topRule": "button-no-name",
+   "requestedUrl": "https://www.w3.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.iana.org/",
+   "title": "Internet Assigned Numbers Authority",
+   "score": 96,
+   "grade": "A",
+   "counts": {
+    "critical": 0,
+    "serious": 1,
+    "moderate": 1,
+    "minor": 4
+   },
+   "total": 6,
+   "topRule": "html-no-lang",
+   "requestedUrl": "https://www.iana.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.ietf.org/",
+   "title": "Just a moment...",
+   "score": 99,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 1
+   },
+   "total": 1,
+   "topRule": "no-h1",
+   "requestedUrl": "https://www.ietf.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://europa.eu/",
+   "title": "Language selection | European Union",
+   "score": 99,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 1
+   },
+   "total": 1,
+   "topRule": "no-h1",
+   "requestedUrl": "https://europa.eu/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.python.org/",
+   "title": "Welcome to Python.org",
+   "score": 88,
+   "grade": "B",
+   "counts": {
+    "critical": 58,
+    "serious": 10,
+    "moderate": 1,
+    "minor": 8
+   },
+   "total": 77,
+   "topRule": "aria-hidden-focus",
+   "requestedUrl": "https://www.python.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.canada.ca/",
+   "title": "Canada.ca",
+   "score": 100,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+   },
+   "total": 0,
+   "topRule": null,
+   "requestedUrl": "https://www.canada.ca/"
+  },
+  {
+   "ok": true,
+   "url": "https://nodejs.org/",
+   "title": "Node.js — Run JavaScript Everywhere",
+   "score": 93,
+   "grade": "A",
+   "counts": {
+    "critical": 2,
+    "serious": 1,
+    "moderate": 0,
+    "minor": 10
+   },
+   "total": 13,
+   "topRule": "aria-hidden-focus",
+   "requestedUrl": "https://nodejs.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.kernel.org/",
+   "title": "The Linux Kernel Archives",
+   "score": 96,
+   "grade": "A",
+   "counts": {
+    "critical": 0,
+    "serious": 7,
+    "moderate": 2,
+    "minor": 2
+   },
+   "total": 11,
+   "topRule": "contrast",
+   "requestedUrl": "https://www.kernel.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.worldbank.org/",
+   "title": "World Bank Group - International Development, Poverty and Sustainability",
+   "score": 99,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 2
+   },
+   "total": 2,
+   "topRule": "link-vague-text",
+   "requestedUrl": "https://www.worldbank.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.kde.org/",
+   "title": "Fovea proxy",
+   "score": 100,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+   },
+   "total": 0,
+   "topRule": null,
+   "requestedUrl": "https://www.kde.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.mozilla.org/",
+   "title": "Mozilla - Internet for people, not profit (US)",
+   "score": 98,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 1,
+    "minor": 15
+   },
+   "total": 16,
+   "topRule": "autocomplete-missing",
+   "requestedUrl": "https://www.mozilla.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.gnome.org/",
+   "title": "GNOME — An independent computing platform for everyone",
+   "score": 99,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 2
+   },
+   "total": 2,
+   "topRule": "heading-empty",
+   "requestedUrl": "https://www.gnome.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.ruby-lang.org/",
+   "title": "Ruby Programming Language",
+   "score": 96,
+   "grade": "A",
+   "counts": {
+    "critical": 0,
+    "serious": 1,
+    "moderate": 0,
+    "minor": 2
+   },
+   "total": 3,
+   "topRule": "html-no-lang",
+   "requestedUrl": "https://www.ruby-lang.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.rust-lang.org/",
+   "title": "Rust Programming Language",
+   "score": 97,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 1,
+    "moderate": 0,
+    "minor": 5
+   },
+   "total": 6,
+   "topRule": "contrast",
+   "requestedUrl": "https://www.rust-lang.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.debian.org/",
+   "title": "Debian -- The Universal Operating System",
+   "score": 78,
+   "grade": "C",
+   "counts": {
+    "critical": 24,
+    "serious": 1,
+    "moderate": 0,
+    "minor": 8
+   },
+   "total": 33,
+   "topRule": "input-no-label",
+   "requestedUrl": "https://www.debian.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://go.dev/",
+   "title": "The Go Programming Language",
+   "score": 83,
+   "grade": "B",
+   "counts": {
+    "critical": 8,
+    "serious": 30,
+    "moderate": 2,
+    "minor": 21
+   },
+   "total": 61,
+   "topRule": "img-link-no-name",
+   "requestedUrl": "https://go.dev/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.php.net/",
+   "title": "PHP",
+   "score": 89,
+   "grade": "B",
+   "counts": {
+    "critical": 2,
+    "serious": 1,
+    "moderate": 0,
+    "minor": 38
+   },
+   "total": 41,
+   "topRule": "button-no-name",
+   "requestedUrl": "https://www.php.net/"
+  },
+  {
+   "ok": true,
+   "url": "https://archive.org/",
+   "title": "Internet Archive: Digital Library of Free & Borrowable Texts, Movies, Music & Wayback Machine",
+   "score": 99,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 1
+   },
+   "total": 1,
+   "topRule": "no-h1",
+   "requestedUrl": "https://archive.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.wikipedia.org/",
+   "title": "Wikipedia",
+   "score": 89,
+   "grade": "B",
+   "counts": {
+    "critical": 3,
+    "serious": 10,
+    "moderate": 0,
+    "minor": 11
+   },
+   "total": 24,
+   "topRule": "input-no-label",
+   "requestedUrl": "https://www.wikipedia.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.postgresql.org/",
+   "title": "PostgreSQL: The world's most advanced open source database",
+   "score": 91,
+   "grade": "A",
+   "counts": {
+    "critical": 3,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 19
+   },
+   "total": 22,
+   "topRule": "button-no-name",
+   "requestedUrl": "https://www.postgresql.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.wikimedia.org/",
+   "title": "Wikimedia",
+   "score": 97,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 1,
+    "moderate": 0,
+    "minor": 1
+   },
+   "total": 2,
+   "topRule": "img-no-alt",
+   "requestedUrl": "https://www.wikimedia.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.sqlite.org/",
+   "title": "SQLite Home Page",
+   "score": 90,
+   "grade": "A",
+   "counts": {
+    "critical": 2,
+    "serious": 6,
+    "moderate": 0,
+    "minor": 1
+   },
+   "total": 9,
+   "topRule": "input-no-label",
+   "requestedUrl": "https://www.sqlite.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.apache.org/",
+   "title": "Welcome to The Apache Software Foundation | Apache Software Foundation",
+   "score": 97,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 4,
+    "moderate": 0,
+    "minor": 81
+   },
+   "total": 85,
+   "topRule": "click-div",
+   "requestedUrl": "https://www.apache.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.openstreetmap.org/",
+   "title": "OpenStreetMap",
+   "score": 79,
+   "grade": "C",
+   "counts": {
+    "critical": 14,
+    "serious": 18,
+    "moderate": 8,
+    "minor": 3
+   },
+   "total": 43,
+   "topRule": "input-no-label",
+   "requestedUrl": "https://www.openstreetmap.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.gnu.org/",
+   "title": "Fovea proxy",
+   "score": 100,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+   },
+   "total": 0,
+   "topRule": null,
+   "requestedUrl": "https://www.gnu.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.gutenberg.org/",
+   "title": "Free eBooks | Project Gutenberg",
+   "score": 98,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 1,
+    "moderate": 0,
+    "minor": 0
+   },
+   "total": 1,
+   "topRule": "click-div",
+   "requestedUrl": "https://www.gutenberg.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.mit.edu/",
+   "title": "MIT - Massachusetts Institute of Technology",
+   "score": 95,
+   "grade": "A",
+   "counts": {
+    "critical": 0,
+    "serious": 10,
+    "moderate": 1,
+    "minor": 27
+   },
+   "total": 38,
+   "topRule": "contrast",
+   "requestedUrl": "https://www.mit.edu/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.ox.ac.uk/",
+   "title": "Just a moment...",
+   "score": 99,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 1
+   },
+   "total": 1,
+   "topRule": "no-h1",
+   "requestedUrl": "https://www.ox.ac.uk/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.linuxfoundation.org/",
+   "title": "Linux Foundation - Decentralized innovation, built with trust",
+   "score": 69,
+   "grade": "C",
+   "counts": {
+    "critical": 42,
+    "serious": 60,
+    "moderate": 8,
+    "minor": 84
+   },
+   "total": 194,
+   "topRule": "input-no-label",
+   "requestedUrl": "https://www.linuxfoundation.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.eclipse.org/",
+   "title": "Eclipse Foundation | Powering Open Innovation",
+   "score": 89,
+   "grade": "B",
+   "counts": {
+    "critical": 3,
+    "serious": 0,
+    "moderate": 2,
+    "minor": 22
+   },
+   "total": 27,
+   "topRule": "input-no-label",
+   "requestedUrl": "https://www.eclipse.org/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.stanford.edu/",
+   "title": "Stanford University",
+   "score": 93,
+   "grade": "A",
+   "counts": {
+    "critical": 3,
+    "serious": 11,
+    "moderate": 11,
+    "minor": 26
+   },
+   "total": 51,
+   "topRule": "contrast",
+   "requestedUrl": "https://www.stanford.edu/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.unimelb.edu.au/",
+   "title": "Just a moment...",
+   "score": 99,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 1
+   },
+   "total": 1,
+   "topRule": "no-h1",
+   "requestedUrl": "https://www.unimelb.edu.au/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.utoronto.ca/",
+   "title": "ERROR 403: The request could not be satisfied",
+   "score": 98,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 1,
+    "moderate": 0,
+    "minor": 0
+   },
+   "total": 1,
+   "topRule": "contrast",
+   "requestedUrl": "https://www.utoronto.ca/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.leidenuniv.nl/",
+   "title": "Fovea proxy",
+   "score": 100,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+   },
+   "total": 0,
+   "topRule": null,
+   "requestedUrl": "https://www.leidenuniv.nl/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.ethz.ch/",
+   "title": "ETH Zürich - Homepage | ETH Zürich",
+   "score": 91,
+   "grade": "A",
+   "counts": {
+    "critical": 7,
+    "serious": 1,
+    "moderate": 1,
+    "minor": 3
+   },
+   "total": 12,
+   "topRule": "aria-hidden-focus",
+   "requestedUrl": "https://www.ethz.ch/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.uio.no/",
+   "title": "403 – Ikke tillatt / Not allowed",
+   "score": 98,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 2,
+    "moderate": 0,
+    "minor": 0
+   },
+   "total": 2,
+   "topRule": "contrast",
+   "requestedUrl": "https://www.uio.no/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.tum.de/",
+   "title": "The Entrepreneurial University - TUM",
+   "score": 89,
+   "grade": "B",
+   "counts": {
+    "critical": 524,
+    "serious": 8,
+    "moderate": 0,
+    "minor": 94
+   },
+   "total": 626,
+   "topRule": "aria-hidden-focus",
+   "requestedUrl": "https://www.tum.de/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.kth.se/",
+   "title": "KTH - Sveriges största tekniska universitet | KTH",
+   "score": 97,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 12,
+    "moderate": 0,
+    "minor": 0
+   },
+   "total": 12,
+   "topRule": "contrast",
+   "requestedUrl": "https://www.kth.se/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.weather.gov/",
+   "title": "National Weather Service",
+   "score": 94,
+   "grade": "A",
+   "counts": {
+    "critical": 0,
+    "serious": 5,
+    "moderate": 0,
+    "minor": 7
+   },
+   "total": 12,
+   "topRule": "html-no-lang",
+   "requestedUrl": "https://www.weather.gov/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.nist.gov/",
+   "title": "National Institute of Standards and Technology",
+   "score": 91,
+   "grade": "A",
+   "counts": {
+    "critical": 1,
+    "serious": 6,
+    "moderate": 1,
+    "minor": 7
+   },
+   "total": 15,
+   "topRule": "button-no-name",
+   "requestedUrl": "https://www.nist.gov/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.si.edu/",
+   "title": "Smithsonian request verification",
+   "score": 100,
+   "grade": "A+",
+   "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+   },
+   "total": 0,
+   "topRule": null,
+   "requestedUrl": "https://www.si.edu/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.u-tokyo.ac.jp/",
+   "title": "東京大学",
+   "score": 91,
+   "grade": "A",
+   "counts": {
+    "critical": 2,
+    "serious": 4,
+    "moderate": 3,
+    "minor": 47
+   },
+   "total": 56,
+   "topRule": "button-no-name",
+   "requestedUrl": "https://www.u-tokyo.ac.jp/"
+  },
+  {
+   "ok": true,
+   "url": "https://www.bl.uk/",
+   "title": "The British Library - the national Library of the UK",
+   "score": 92,
+   "grade": "A",
+   "counts": {
+    "critical": 14,
+    "serious": 0,
+    "moderate": 1,
+    "minor": 9
+   },
+   "total": 24,
+   "topRule": "aria-hidden-focus",
+   "requestedUrl": "https://www.bl.uk/"
+  }
+ ],
+ "provenance": "50 of 50 seed homepages audited successfully on 2026-11-05. Pipeline: server-side fetch (same-origin proxy, scripts stripped) → headless Chromium render → Fovea engine (24 WCAG 2.2-aligned rules, Access Score) → aggregation. One homepage fetch per seed, standard crawler user-agent, no personal data collected; only per-page audit results are stored, not page copies. Failures (bot protection, timeouts, size caps) are listed and skipped."
+}
