@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The state of the web, audited — Fovea corpus report</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230e7a4d'/%3E%3Ccircle cx='16' cy='16' r='7' fill='white'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%2314201a'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brandmark" href="/"><span class="eye"></span> Fovea <small>accessibility X-ray</small></a>
+    <span style="flex:1"></span>
+    <a class="btn ghost" href="/" style="text-decoration:none">← New audit</a>
+  </header>
+
+  <main class="batch">
+    <span class="kicker">● Batch pipeline — same engine, run headlessly across real homepages</span>
+    <h1 style="font-size:34px; letter-spacing:-.02em; margin:14px 0 8px">The state of the web, audited.</h1>
+    <p class="sub" style="max-width:680px">We crawled real homepages through Fovea's fetch → rewrite → render → analyze → aggregate pipeline
+      and scored each one with the same rule engine that powers the workspace. No manual picks, no cherry-picking: the pipeline audits whatever the seed list contains.</p>
+
+    <div class="statgrid" id="stats">
+      <div class="stat"><b id="sPages">–</b><span>homepages audited</span></div>
+      <div class="stat"><b id="sMean">–</b><span>mean Access Score</span></div>
+      <div class="stat"><b id="sFail">–</b><span>score below 90 (would fail AA review)</span></div>
+      <div class="stat"><b id="sZero">–</b><span>perfect 100 scores</span></div>
+    </div>
+
+    <div class="panel">
+      <h3>Most common violations across the corpus</h3>
+      <div id="topRules"></div>
+    </div>
+
+    <div class="panel">
+      <h3>Access Score distribution</h3>
+      <div class="hist" id="hist"></div>
+      <div class="note" style="display:flex; justify-content:space-between; margin-top:6px"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+    </div>
+
+    <div class="panel">
+      <h3>Per-page results</h3>
+      <table class="data" id="pagesTable">
+        <thead><tr><th>Page</th><th>Score</th><th>Grade</th><th>Critical</th><th>Serious</th><th>Top violation</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <p class="note" id="provenance" style="margin-top:16px"></p>
+  </main>
+
+  <script type="module" src="/batch.js"></script>
+</body>
+</html>

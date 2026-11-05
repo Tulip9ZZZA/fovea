@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Workspace — Fovea</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230e7a4d'/%3E%3Ccircle cx='16' cy='16' r='7' fill='white'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%2314201a'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brandmark" href="/"><span class="eye"></span> Fovea <small>accessibility X-ray</small></a>
+    <span style="flex:1"></span>
+    <span class="sourcebadge" id="sourceBadge">loading…</span>
+    <a class="btn ghost" href="/" style="text-decoration:none">← New audit</a>
+  </header>
+
+  <main class="ws">
+    <section class="stage-panel">
+      <div class="stage-toolbar">
+        <form class="urlform" id="urlForm">
+          <input id="url" type="url" placeholder="https://example.com — or paste HTML from the home page" aria-label="URL to audit">
+          <button class="btn primary small" type="submit">Audit URL</button>
+        </form>
+        <button class="btn small" id="btnDemo">Demo shop</button>
+        <span style="width:1px; height:22px; background:var(--line)"></span>
+        <button class="btn small primary" id="btnXray" aria-pressed="false">X-ray</button>
+        <select id="simSelect" aria-label="Disability simulation" style="font-size:13px; padding:7px 9px">
+          <option value="none">No simulation</option>
+          <option value="protanopia">Protanopia (red-blind)</option>
+          <option value="deuteranopia">Deuteranopia (green-blind)</option>
+          <option value="tritanopia">Tritanopia (blue-blind)</option>
+          <option value="lowvision">Low vision (tunnel + blur)</option>
+        </select>
+        <button class="btn small" id="btnTab" aria-pressed="false">Keyboard-only</button>
+        <button class="btn small" id="btnScoreInfo" title="How the score works">ⓘ Score</button>
+      </div>
+      <div class="stagebox">
+        <iframe id="stage" title="Audited page (sandboxed, scripts disabled)"></iframe>
+        <div id="overlay"></div>
+        <div id="vignette"></div>
+      </div>
+    </section>
+
+    <aside class="side">
+      <div class="scorecard">
+        <div class="scorehead">
+          <div class="dial">
+            <svg width="108" height="108" viewBox="0 0 108 108">
+              <circle cx="54" cy="54" r="46" fill="none" stroke="#e8eeea" stroke-width="10"/>
+              <circle id="dialArc" cx="54" cy="54" r="46" fill="none" stroke="#0e7a4d" stroke-width="10"
+                      stroke-linecap="round" stroke-dasharray="289" stroke-dashoffset="289"
+                      style="transition: stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1)"/>
+            </svg>
+            <div class="val"><div><b id="scoreVal">–</b><br><span>ACCESS SCORE</span></div></div>
+          </div>
+          <div>
+            <div style="font-size:14px; font-weight:700" id="pageTitle">…</div>
+            <div class="note" id="scanMeta" style="margin-top:4px">–</div>
+            <div style="margin-top:8px"><span class="gradepill" id="gradePill">–</span></div>
+          </div>
+        </div>
+        <div class="counts">
+          <div class="c" style="background:#fbe4e4; color:#a12c2c"><b id="cCritical">0</b>critical</div>
+          <div class="c" style="background:#f9ecd8; color:#a3640a"><b id="cSerious">0</b>serious</div>
+          <div class="c" style="background:#faf3d8; color:#8a6d08"><b id="cModerate">0</b>moderate</div>
+          <div class="c" style="background:#e8ede9; color:#46554d"><b id="cMinor">0</b>minor</div>
+        </div>
+        <div class="fixline">
+          <span>Live fixes applied: <b id="fixCount">0</b></span>
+          <span>Before <b id="beforeScore">–</b> → after <b id="afterScore">–</b></span>
+        </div>
+      </div>
+
+      <div class="violist">
+        <header>
+          <span>Violations <span class="note" id="vCount"></span></span>
+          <label class="note" style="display:flex; align-items:center; gap:5px">
+            <input type="checkbox" id="hideFixed" checked style="accent-color:#0e7a4d"> hide fixed
+          </label>
+        </header>
+        <div class="vlist" id="vlist"></div>
+      </div>
+    </aside>
+  </main>
+
+  <section class="drawer" id="transcriptDrawer">
+    <header id="drawerHead">
+      <span>Screen-reader transcript <span class="note">(approximate reading order — awareness aid, not a screen reader)</span></span>
+      <span id="drawerChevron">▾</span>
+    </header>
+    <div class="body" id="transcriptBody" hidden></div>
+  </section>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <filter id="fovea-sim-protanopia"><feColorMatrix type="matrix" id="m-protanopia"/></filter>
+      <filter id="fovea-sim-deuteranopia"><feColorMatrix type="matrix" id="m-deuteranopia"/></filter>
+      <filter id="fovea-sim-tritanopia"><feColorMatrix type="matrix" id="m-tritanopia"/></filter>
+    </defs>
+  </svg>
+
+  <div class="modal" id="scoreInfo" role="dialog" aria-modal="true" aria-label="About the Access Score">
+    <div class="box" style="max-width:560px">
+      <h3 style="margin-top:0">About the Access Score</h3>
+      <p class="note" style="font-size:13px">The score starts at 100 and subtracts one weighted deduction per <b>rule</b> with open violations
+      (like Lighthouse, repetition of the same mistake saturates instead of stacking): <b>severity</b> (critical 6 · serious 3 · moderate 1.2 · minor 0.4)
+      × <b>scope</b> (page-wide ×1.5 · interactive element ×1.1 · content ×1 / ×0.7), and the first instance of a rule costs half weight.
+      It is a deterministic triage signal to order your work — not a WCAG certification. Every open violation is visible in the list on the right.</p>
+      <div style="display:flex; justify-content:flex-end"><button class="btn" onclick="document.getElementById('scoreInfo').classList.remove('open')">Close</button></div>
+    </div>
+  </div>
+
+  <script type="module" src="/workspace.js"></script>
+</body>
+</html>

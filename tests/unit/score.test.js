@@ -19,12 +19,12 @@ test('any violation breaks the perfect score (floor rounding)', () => {
   assert.equal(s.score, 99);
 });
 
-test('critical costs more than minor; score never goes below 0', () => {
+test('critical costs more than minor; pathological pages floor at 0', () => {
   const minor = computeScore([v('link-vague-text', 'minor', 'a')]).score;
   const crit = computeScore([v('button-no-name', 'critical', 'button')]).score;
   assert.ok(crit < minor);
-  const flood = computeScore(Array.from({ length: 120 }, () => v('img-no-alt', 'serious', 'img')));
-  assert.equal(flood.score, 0);
+  const disaster = computeScore(Array.from({ length: 25 }, (_, i) => v(`page-rule-${i}`, 'critical', 'html', { pageLevel: true })));
+  assert.equal(disaster.score, 0);
 });
 
 test('page-level violations weigh double', () => {

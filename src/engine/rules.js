@@ -12,7 +12,7 @@ function violation(rule, snap, extra) {
   return {
     ruleId: rule.id, wcag: rule.wcag, severity: rule.severity,
     title: rule.title, why: rule.why,
-    selector: snap.selector, tag: snap.tag,
+    selector: snap.selector, tag: snap.tag, elIndex: snap.i,
     snippet: (snap.text || snap.attrs.alt || '').slice(0, 80),
     rect: snap.rect,
     ...extra,
@@ -321,7 +321,23 @@ export function runRules(snapshots) {
     const m = /^h([1-6])$/.exec(s.tag);
     if (m && (s.text || '').trim()) ctx.lastHeading = Number(m[1]);
   }
-  return out; // document order; UI groups by severity
+  return dedupeSubtrees(out, snapshots);
+}
+
+// A cursor:pointer widget root makes every child LOOK clickable too (cursor inherits),
+// so click-div reports only the outermost flagged element: drop a violation when one of
+// its ancestors is also flagged. Contrast is NOT deduped this way — every text run is
+// its own violation.
+function dedupeSubtrees(violations, snapshots) {
+  const clickDivs = violations.filter(v => v.ruleId === 'click-div');
+  if (clickDivs.length < 2) return violations;
+  const idxSet = new Set(clickDivs.map(v => v.elIndex));
+  const drop = new Set();
+  for (const v of clickDivs) {
+    const snap = snapshots[v.elIndex];
+    if ((snap?.parents || []).some(p => idxSet.has(p.index))) drop.add(v);
+  }
+  return drop.size ? violations.filter(v => !drop.has(v)) : violations;
 }
 
 export function buildCtx(snapshots) {

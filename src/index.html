@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fovea — X-ray your website for accessibility</title>
+  <meta name="description" content="See your website the way users with disabilities do. Fovea overlays WCAG failures on the live page, simulates low vision and color blindness, and fixes what it finds — live.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230e7a4d'/%3E%3Ccircle cx='16' cy='16' r='7' fill='white'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%2314201a'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brandmark" href="/"><span class="eye"></span> Fovea <small>accessibility X-ray</small></a>
+    <span style="flex:1"></span>
+    <a class="btn ghost" href="/batch.html" style="text-decoration:none">Web corpus report</a>
+    <a class="btn ghost" href="https://github.com/fovea-hack/fovea" style="text-decoration:none">Source</a>
+  </header>
+
+  <main>
+    <section class="hero-wrap">
+      <span class="kicker">● Built during Next Byte Hacks V5 · runs 100% locally</span>
+      <h1 class="display">Most websites are broken for <em>1.3 billion people</em>. You just can't see it.</h1>
+      <p class="sub">Fovea X-rays any web page and shows you exactly what users with disabilities experience: violations stamped on the real elements, what a screen reader reads out, a keyboard-only tab path, low-vision and color-blindness simulations — and one-click live fixes with the score moving as you watch.</p>
+
+      <div class="auditbox">
+        <div class="row">
+          <input id="url" type="url" placeholder="Paste a page URL — e.g. https://example.com" aria-label="Page URL to audit">
+          <button class="btn primary" id="go">X-ray it</button>
+        </div>
+        <div class="quick">
+          <span class="note" style="margin-right:2px">No page in mind?</span>
+          <button class="btn small" id="demo">Audit the demo shop</button>
+          <button class="btn small" id="paste">Paste HTML instead</button>
+          <span class="note">Scripts are stripped from audited pages — markup and styles only.</span>
+        </div>
+      </div>
+
+      <div class="trust">
+        <div class="t"><b>24 rules</b><span>WCAG 2.2-aligned checks</span></div>
+        <div class="t"><b>~96%</b><span>of top sites have detectable failures (WebAIM Million)</span></div>
+        <div class="t"><b>0 API keys</b><span>everything computes locally</span></div>
+        <div class="t"><b>Live fixes</b><span>watch the score move</span></div>
+      </div>
+    </section>
+
+    <section class="how">
+      <h2>How Fovea works</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="num">1</div>
+          <b>Render, don't guess</b>
+          <p>Your page loads in a sandboxed frame. Fovea reads every element's real computed styles — cascade, inheritance and all — instead of approximating from raw HTML.</p>
+        </div>
+        <div class="card">
+          <div class="num">2</div>
+          <b>24 WCAG-aligned rules</b>
+          <p>Contrast via WCAG relative-luminance math with ancestor alpha-compositing, missing names and labels, skipped headings, broken tab order, disabled zoom, and more.</p>
+        </div>
+        <div class="card">
+          <div class="num">3</div>
+          <b>X-ray + simulate</b>
+          <p>Violations pin onto the live elements. Then step into your users' shoes: protanopia, deuteranopia, tritanopia, low-vision tunnel vision, and a keyboard-only walkthrough.</p>
+        </div>
+        <div class="card">
+          <div class="num">4</div>
+          <b>Fix it live</b>
+          <p>Apply a suggested fix to the sandboxed copy and the Access Score recomputes instantly — a before/after record proves what changed, with copy-paste snippets for the real code.</p>
+        </div>
+      </div>
+      <p class="note" style="margin-top:18px">Fovea is a triage and awareness tool built in a hackathon — it does not certify WCAG conformance, and simulations are approximations, not clinical tools. See DECISIONS.md for every deliberate limitation.</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="note">Fovea · Next Byte Hacks V5 · MIT license · no trackers, no keys, no network calls beyond the pages you audit.</p>
+  </footer>
+
+  <div class="modal" id="pasteModal" role="dialog" aria-modal="true" aria-label="Paste HTML to audit">
+    <div class="box">
+      <h3 style="margin-top:0">Paste HTML to audit</h3>
+      <p class="note">Paste a full document or a fragment. It renders in the same sandboxed frame — scripts never run.</p>
+      <textarea id="pasteArea" spellcheck="false" placeholder="&lt;html&gt; … &lt;/html&gt;"></textarea>
+      <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:12px">
+        <button class="btn" id="pasteCancel">Cancel</button>
+        <button class="btn primary" id="pasteGo">X-ray this HTML</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    document.getElementById('go').addEventListener('click', () => {
+      const u = document.getElementById('url').value.trim();
+      if (u) location.href = '/workspace.html?url=' + encodeURIComponent(u);
+    });
+    document.getElementById('url').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('go').click(); });
+    document.getElementById('demo').addEventListener('click', () => { location.href = '/workspace.html?demo=1'; });
+    const modal = document.getElementById('pasteModal');
+    document.getElementById('paste').addEventListener('click', () => modal.classList.add('open'));
+    document.getElementById('pasteCancel').addEventListener('click', () => modal.classList.remove('open'));
+    document.getElementById('pasteGo').addEventListener('click', () => {
+      const html = document.getElementById('pasteArea').value;
+      if (!html.trim()) return;
+      sessionStorage.setItem('fovea-paste', html);
+      location.href = '/workspace.html?paste=1';
+    });
+  </script>
+</body>
+</html>

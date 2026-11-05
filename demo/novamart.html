@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!-- NovaMart — a fictional online grocery store.
+     Built as Fovea's built-in audit target: a realistic-looking shop page that carries a
+     representative set of WCAG 2.2-aligned violations (contrast, names/labels, structure,
+     keyboard, forms). All data, brands and people are invented. -->
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    body { font-family: -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; color: #1d2430; background: #ffffff; }
+    .topbar { background: #123a2b; color: #ffffff; padding: 14px 28px; display: flex; align-items: center; gap: 22px; }
+    .logo { font-weight: 800; font-size: 21px; letter-spacing: .3px; }
+    .logo .dot { color: #8fd6a9; }
+    .search { flex: 1; max-width: 460px; display: flex; }
+    .search input { flex: 1; padding: 9px 12px; border: none; border-radius: 6px 0 0 6px; font-size: 14px; }
+    .search button { padding: 9px 16px; border: none; background: #8fd6a9; border-radius: 0 6px 6px 0; font-weight: 700; cursor: pointer; }
+    .toplink { color: #b7c4bd; font-size: 13px; text-decoration: none; }
+    .promo { background: #ffe9a8; color: #ffffff; text-align: center; padding: 9px; font-size: 14.5px; font-weight: 600; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 22px 28px 60px; }
+    h2 { margin: 26px 0 12px; font-size: 21px; }
+    h4 { margin: 8px 0; font-size: 15px; }
+    .hero { display: flex; gap: 24px; align-items: center; background: #f2f7f4; border-radius: 12px; padding: 26px; }
+    .hero .pitch { font-size: 14px; color: #9aa5a0; margin-top: 8px; max-width: 430px; }
+    .cta { display: inline-block; margin-top: 14px; background: #167a4f; color: #aee9c6; padding: 11px 22px; border-radius: 8px; text-decoration: none; font-weight: 700; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 6px; }
+    .card { border: 1px solid #e4e9e6; border-radius: 10px; overflow: hidden; }
+    .card img { width: 100%; height: 110px; object-fit: cover; display: block; }
+    .card .pad { padding: 10px 12px 14px; }
+    .name { font-size: 14.5px; font-weight: 600; }
+    .price { color: #b9b9b9; font-size: 14px; margin-top: 4px; }
+    .stock { font-size: 11.5px; color: #c9cfc9; margin-top: 2px; }
+    .add { margin-top: 9px; width: 100%; padding: 8px 0; border: 1px solid #d6ddd8; background: #ffffff; border-radius: 7px; font-weight: 600; cursor: pointer; }
+    .row { display: flex; gap: 18px; margin-top: 8px; }
+    .col { flex: 1; }
+    label { display: block; font-size: 12.5px; color: #4c5a52; margin: 10px 0 4px; }
+    input[type=text], input[type=email] { width: 100%; padding: 9px 10px; border: 1px solid #d6ddd8; border-radius: 7px; font-size: 14px; }
+    .fine { color: #a9b3ab; font-size: 12px; margin-top: 10px; }
+    .iconbtn { border: none; background: none; cursor: pointer; font-size: 18px; padding: 6px; }
+    .banner { position: relative; background: #123a2b; color: #ffffff; border-radius: 10px; padding: 18px 20px; margin-top: 26px; }
+    .banner .close { position: absolute; top: 8px; right: 10px; }
+    table { border-collapse: collapse; width: 100%; font-size: 13.5px; margin-top: 8px; }
+    td { border: 1px solid #e4e9e6; padding: 7px 10px; }
+    .foot { background: #f5f5f5; margin-top: 40px; padding: 22px 28px; display: flex; gap: 30px; font-size: 13px; }
+    .foot a { color: #8a8a8a; display: block; margin-bottom: 6px; text-decoration: none; }
+    .foot .brand { color: #9aa39d; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <span class="logo" id="brand">Nova<span class="dot">Mart</span></span>
+    <div class="search">
+      <input type="text" placeholder="Search products, brands and weekly deals">
+      <button>Go</button>
+    </div>
+    <a class="toplink" href="#deals">Weekly deals</a>
+    <a class="toplink" href="#orders">My orders</a>
+    <a class="toplink" href="https://help.novamart.example" target="_blank">Help center</a>
+    <button class="iconbtn" title="">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L23 7H6"/></svg>
+    </button>
+  </div>
+
+  <div class="promo">Free delivery on orders over $30 — today only!</div>
+
+  <div class="wrap">
+    <h3></h3>
+
+    <div class="hero">
+      <div>
+        <h2>Fresh groceries, 30-minute delivery</h2>
+        <p class="pitch">Order from local farms and your favourite stores. Pick a slot, we do the rest.</p>
+        <a class="cta" href="#start">Start shopping</a>
+      </div>
+        <a href="#harvest-story"><img width="300" height="140" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='140'%3E%3Crect width='300' height='140' fill='%23cfe8d8'/%3E%3Ccircle cx='80' cy='90' r='38' fill='%23f2b03d'/%3E%3Crect x='150' y='40' width='110' height='70' rx='10' fill='%23167a4f'/%3E%3Cpath d='M160 75h90M160 90h60' stroke='%23cfe8d8' stroke-width='6'/%3E%3C/svg%3E"></a>
+    </div>
+
+    <h2>This week's deals</h2>
+    <div class="grid">
+      <div class="card">
+        <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='110'%3E%3Crect width='220' height='110' fill='%23f9e0c8'/%3E%3Ccircle cx='110' cy='58' r='34' fill='%23e0703a'/%3E%3C/svg%3E">
+        <div class="pad">
+          <div class="name">Organic oranges (2 kg)</div>
+          <div class="price">$4.90</div>
+          <div class="stock">Only 7 left</div>
+          <button class="add">Add to basket</button>
+        </div>
+      </div>
+      <div class="card">
+        <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='110'%3E%3Crect width='220' height='110' fill='%23d8e6f7'/%3E%3Crect x='60' y='30' width='100' height='55' rx='8' fill='%233a6fd8'/%3E%3C/svg%3E">
+        <div class="pad">
+          <div class="name">Wholegrain bread</div>
+          <div class="price">$2.40</div>
+          <div class="stock">In stock</div>
+          <button class="add">Add to basket</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='110'%3E%3Crect width='220' height='110' fill='%23e8ddf4'/%3E%3Ccircle cx='80' cy='60' r='30' fill='%237a4fd8'/%3E%3Ccircle cx='140' cy='60' r='30' fill='%239a6ff8'/%3E%3C/svg%3E">
+        <div class="pad">
+          <div class="name">Seasonal berries box</div>
+          <div class="price">$6.10</div>
+          <div class="stock">In stock</div>
+          <button class="add">Add to basket</button>
+        </div>
+      </div>
+      <div class="card" tabindex="5" onclick="location.href='#deal-4'" style="cursor:pointer">
+        <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='110'%3E%3Crect width='220' height='110' fill='%23f4dede'/%3E%3Cpath d='M40 80 L110 30 L180 80 Z' fill='%23d84f4f'/%3E%3C/svg%3E">
+        <div class="pad">
+          <div class="name">Deal of the day — coffee beans</div>
+          <div class="price">$8.20</div>
+          <div class="stock">Ends at midnight</div>
+          <button class="add">Add to basket</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="banner" aria-hidden="true">
+      <button class="iconbtn close" aria-label="Close banner">
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke="#ffffff" stroke-width="2" fill="none"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+      Refer a friend and both get $10 off your next basket.
+      <a href="#refer" style="color:#cde8d8; margin-left:8px">See how it works</a>
+    </div>
+
+    <h2>Delivery options</h2>
+    <label for="slot" style="font-size:13px">Preferred delivery slot</label>
+    <table>
+      <tr><td>Express (30 min)</td><td>$6.90</td><td>7:00 – 22:00</td></tr>
+      <tr><td>Same day</td><td>$3.90</td><td>Order by 14:00</td></tr>
+      <tr><td>Next day</td><td>Free over $30</td><td>Choose any slot</td></tr>
+    </table>
+
+    <h2>Get weekly deals by email</h2>
+    <div class="row">
+      <div class="col">
+        <label for="newsletter">Your name</label>
+        <input type="text" id="newsletter" placeholder="Ada Lovelace">
+      </div>
+      <div class="col">
+        <input type="email" placeholder="you@example.com">
+      </div>
+      <div class="col" style="max-width:170px">
+        <label for="subscribe">Frequency</label>
+        <select id="subscribe"><option>Weekly</option><option>Daily</option></select>
+      </div>
+    </div>
+    <p class="fine">By subscribing you agree to our terms. <a href="#terms">Click here</a> to read more. Unsubscribe anytime.</p>
+
+    <h2>Store pickup</h2>
+    <iframe srcdoc="<p>Map placeholder — 12 pickup points near you.</p>" width="100%" height="90" style="border:1px solid #e4e9e6; border-radius:8px"></iframe>
+  </div>
+
+  <div class="foot">
+    <div>
+      <div class="brand" id="brand">NovaMart</div>
+      <div style="margin-top:8px">Fictional demo store for the Fovea accessibility X-ray.<br>All products and people are invented.</div>
+    </div>
+    <div>
+      <h4 style="font-size:14px; color:#4c5a52; margin-bottom:6px">Shop</h4>
+      <a href="#about">About us</a>
+      <a href="#careers">Careers</a>
+      <a href="#press">Press</a>
+    </div>
+    <div>
+      <a href="#privacy">Privacy</a>
+      <a href="#terms-full">Terms</a>
+      <a href="#accessibility">Accessibility statement</a>
+    </div>
+  </div>
+</body>
+</html>
