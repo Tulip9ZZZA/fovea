@@ -1,0 +1,22 @@
+{
+  "name": "fovea",
+  "version": "1.0.0",
+  "description": "X-ray your website for accessibility — see what your users see, find what breaks, and fix it live.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test tests/unit/",
+    "test:e2e": "playwright test",
+    "crawl": "node bin/crawl.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0"
+  },
+  "license": "MIT"
+}
