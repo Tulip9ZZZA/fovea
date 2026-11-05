@@ -172,8 +172,8 @@ h1.display em { font-style: normal; color: var(--brand); }
 .panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; margin-top: 14px; }
 .panel h3 { margin: 0 0 12px; font-size: 15.5px; }
 .hbar { display: grid; grid-template-columns: 210px 1fr 46px; align-items: center; gap: 10px; margin: 7px 0; font-size: 12.5px; }
-.hbar .track { background: var(--paper); border-radius: 6px; height: 16px; overflow: hidden; }
-.hbar .fill { height: 100%; background: var(--brand); border-radius: 6px; }
+.hbar .track { display: block; background: var(--paper); border-radius: 6px; height: 16px; overflow: hidden; }
+.hbar .fill { display: block; height: 100%; background: var(--brand); border-radius: 6px; }
 .hist { display: flex; align-items: flex-end; gap: 3px; height: 120px; padding-top: 8px; }
 .hist .b { flex: 1; background: #9fcdb4; border-radius: 3px 3px 0 0; min-height: 2px; }
 table.data { width: 100%; border-collapse: collapse; font-size: 13px; }
