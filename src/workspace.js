@@ -17,7 +17,7 @@ const state = {
   xray: true,
   sim: 'none',
   tabMode: false,
-  fixed: new Map(),      // ruleId+selector -> true
+  fixedRules: new Map(), // ruleId -> instances fixed this session
   beforeScore: null,
   afterScore: null,
   fixCount: 0,
@@ -149,33 +149,44 @@ function renderViolations() {
   const r = state.result;
   const list = $('vlist');
   list.innerHTML = '';
-  const open = r.violations.filter(v => !state.fixed.has(v.ruleId + '|' + v.selector));
-  const done = r.violations.filter(v => state.fixed.has(v.ruleId + '|' + v.selector));
-  const ordered = [...prioritize(open), ...done];
-  $('vCount').textContent = `(${open.length} open · ${done.length} fixed)`;
-  for (const v of ordered) {
-    const key = v.ruleId + '|' + v.selector;
-    const isFixed = state.fixed.has(key);
-    const openSameRule = open.filter(x => x.ruleId === v.ruleId).length;
+  const open = prioritize(r.violations);
+  const fixedRows = [...state.fixedRules.entries()];
+  $('vCount').textContent = `(${r.violations.length} open · ${fixedRows.length} rules fixed live)`;
+  for (const v of open) {
     const item = document.createElement('div');
-    item.className = 'vitem' + (isFixed ? ' fixed' : '');
-    item.dataset.key = key;
+    item.className = 'vitem';
+    item.dataset.key = v.ruleId + '|' + v.selector;
     const extra = v.ratio ? `${v.ratio}:1 vs ${v.required}:1 required` : '';
+    const openSameRule = open.filter(x => x.ruleId === v.ruleId).length;
     item.innerHTML = `
       <div class="vrow">
         <span class="vt">${v.title}</span>
-        ${isFixed ? '<span class="fixedbadge">✓ fixed live</span>' : `<span class="chip ${v.severity}">${v.severity}</span>`}
+        <span class="chip ${v.severity}">${v.severity}</span>
       </div>
       <div class="vs">${v.why}${extra ? ` — <b>${extra}</b>.` : ''}</div>
       <div class="sel">${v.selector} · WCAG ${v.wcag}</div>
       <div class="actions">
         <button class="btn small ghost" data-act="locate">Locate</button>
-        ${canFix(v.ruleId) && !isFixed ? `<button class="btn small primary" data-act="fix">Fix all${openSameRule > 1 ? ` (${openSameRule})` : ''}</button>` : ''}
+        ${canFix(v.ruleId) ? `<button class="btn small primary" data-act="fix">Fix all${openSameRule > 1 ? ` (${openSameRule})` : ''}</button>` : ''}
       </div>`;
     item.addEventListener('click', e => {
       if (e.target.dataset.act === 'fix') { applyLive(v, item); return; }
       locate(v, item);
     });
+    list.appendChild(item);
+  }
+  // session record of rules fixed live (they are gone from the re-scan)
+  for (const [ruleId, n] of fixedRows) {
+    const rule = RULES.find(x => x.id === ruleId);
+    if ($('hideFixed').checked) continue;
+    const item = document.createElement('div');
+    item.className = 'vitem fixed';
+    item.innerHTML = `
+      <div class="vrow">
+        <span class="vt">${rule ? rule.title : ruleId}</span>
+        <span class="fixedbadge">✓ fixed live</span>
+      </div>
+      <div class="vs">${n} instance${n === 1 ? '' : 's'} corrected in this session — re-scan is clean for this rule.</div>`;
     list.appendChild(item);
   }
 }
@@ -194,16 +205,13 @@ function applyLive(v, item) {
   const doc = stage.contentDocument;
   if (!doc) return;
   // one click fixes every open instance of the rule, so the score jump is visible
-  const same = state.result.violations.filter(x =>
-    x.ruleId === v.ruleId && !state.fixed.has(x.ruleId + '|' + x.selector));
+  const same = state.result.violations.filter(x => x.ruleId === v.ruleId);
   let applied = 0;
-  same.forEach((x, i) => {
-    if (applyFix(v.ruleId, x, doc, state.fixCount + applied)) {
-      state.fixed.set(x.ruleId + '|' + x.selector, true);
-      applied += 1;
-    }
+  same.forEach(x => {
+    if (applyFix(v.ruleId, x, doc, state.fixCount + applied)) applied += 1;
   });
   if (!applied) return;
+  state.fixedRules.set(v.ruleId, (state.fixedRules.get(v.ruleId) || 0) + applied);
   state.fixCount += applied;
   setTimeout(() => scanNow(), 30);
 }
@@ -249,15 +257,13 @@ function buildOverlay() {
   if (!state.xray) return;
   const doc = stage.contentDocument;
   r.violations.forEach((v, i) => {
-    const isFixed = state.fixed.has(v.ruleId + '|' + v.selector);
-    if (isFixed && $('hideFixed').checked) return;
     const el = doc?.querySelector(v.selector);
     if (!el && !(v.rect.w > 1)) return;
     const chip = document.createElement('div');
     chip.className = `vchip ${v.severity}`;
     chip.dataset.key = v.ruleId + '|' + v.selector;
     chip.style.animationDelay = `${Math.min(i * 22, 900)}ms`;
-    chip.innerHTML = `<span class="tag">${short(v.ruleId)}${isFixed ? ' ✓' : ''}</span>`;
+    chip.innerHTML = `<span class="tag">${short(v.ruleId)}</span>`;
     overlay.appendChild(chip);
     chipRefs.push({ node: chip, el, fallbackRect: el ? null : v.rect });
   });
@@ -271,6 +277,12 @@ function tick() {
       : c.fallbackRect;
     if (!rect || (rect.width < 1 && rect.height < 1)) { c.node.style.display = 'none'; continue; }
     c.node.style.display = '';
+    if (c.node.classList.contains('kchip')) {
+      // keyboard chips stay badge-sized and track the element's center
+      c.node.style.left = `${rect.x + rect.width / 2 - 12}px`;
+      c.node.style.top = `${rect.y + rect.height / 2 - 12}px`;
+      continue;
+    }
     const pad = c.node.classList.contains('vchip') ? 2 : 3;
     c.node.style.left = `${rect.x - pad}px`;
     c.node.style.top = `${rect.y - pad}px`;
@@ -352,7 +364,7 @@ function escapeHtml(s) {
 }
 
 function resetSession() {
-  state.fixed.clear();
+  state.fixedRules.clear();
   state.fixCount = 0;
   state.beforeScore = null;
   state.afterScore = null;
@@ -360,3 +372,4 @@ function resetSession() {
 
 // ready hook for the e2e suite / crawler
 window.__foveaReady = true;
+requestAnimationFrame(tick); // start the overlay geometry loop once
