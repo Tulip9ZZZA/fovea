@@ -8,10 +8,10 @@
 | Technologies used list | ✅ | devpost.md §Technologies used |
 | Screenshots / images (4-5) | ✅ | submission/screenshots/ (5 PNGs, also in repo docs/) |
 | Demo video 2–5 min (page says 1–3 min) — we ship 2:47, satisfying both | ✅ | submission/demo_raw.mp4 (166.7 s, 1920×1080, 30 fps, ffprobe-verified) |
-| Video clearly explains what / how / problem | ✅ script ready | docs/demo-script.md (beats a/b/c mapped) + submission/voiceover.txt |
-| **⚠ Video must carry the voiceover or captions when uploaded** — the raw take is silent | ⚠ MANUAL | record voiceover.txt over demo_raw.mp4 (see manual steps) |
+| Video clearly explains what / how / problem | ✅ script ready | docs/demo-script.md (beats a/b/c mapped) + docs/voiceover-explainer.md (SaaS-explainer script, gate-tested, mapped to the real footage beat table) + docs/voiceover-explainer-tts.txt (TTS-ready) |
+| **⚠ Video must carry the voiceover or captions when uploaded** — the raw take is silent | ⚠ MANUAL | record submission/voiceover-explainer-tts.txt over demo_raw.mp4 (see manual steps) |
 | GitHub repo link with accessible source code | ⚠ MANUAL | repo is in submission/fovea-repo.zip (with full git history); create the public GitHub repo and push |
-| Setup works from a clean clone in ≤3 commands | ✅ verified | README §Try it; `npm install && npm start` (2 commands) — verified from a fresh clone |
+| Setup works from a clean clone in ≤3 commands | ✅ verified (Node 24) | README §Try it; `npm install && npm start` — re-verified from the zip on Node v24: install OK, `npm test` 39/39 pass (test-script glob fixed for Node ≥22), server HTTP 200 |
 | No paid API keys; runs offline/local | ✅ | zero runtime deps beyond express; no env vars, no .env |
 | No secrets committed | ✅ | compliance/COMPLIANCE.md (grep evidence) |
 | Licensing: all dependencies permissive + listed | ✅ | CREDITS.md + compliance/licenses.txt |
@@ -23,6 +23,6 @@
 
 Manual steps left (also in the final reply):
 1. Create the public GitHub repo, unzip submission/fovea-repo.zip, `git push`.
-2. Record your voice reading submission/voiceover.txt over submission/demo_raw.mp4 (2:47), or add captions; upload.
+2. Record your voice reading submission/voiceover-explainer-tts.txt over submission/demo_raw.mp4 (2:47), or add captions; upload.
 3. Paste devpost.md into the Devpost form; upload the 5 screenshots.
 4. Fill in team info (1–4 real members).

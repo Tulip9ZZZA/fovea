@@ -1,0 +1,13 @@
+Ninety-five point nine percent of the top one million websites are failing accessibility right now. Yours is probably one of them. So I joined a hackathon and built the tool that proves it in four seconds.
+
+Here's the problem nobody talks about. Contrast bugs look fine on your monitor. A button with no label works perfectly with a mouse. You cannot fix what you cannot see, while a billion disabled users feel every single bug.
+
+So meet Fovea, the accessibility X-ray. Paste any link, and it audits the real page and stamps every violation onto the exact element that caused it. Score: sixty-six.
+
+Then it shows you your users. Color blindness. Low vision. Keyboard only. And then the part that broke my brain: one click, fix all, live re-scan. Sixty-six to eighty-nine, on camera, with the code snippet ready to paste.
+
+And it does not stop at one page. I crawled fifty real homepages. Governments, universities. Sixteen hundred violations. Seven hundred critical.
+
+Fovea. From invisible to undeniable. Open source, no API keys, built in one hackathon. Link below.
+
+Now drop the worst website you know in the comments, and I will X-ray it next.

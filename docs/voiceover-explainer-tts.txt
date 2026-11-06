@@ -1,0 +1,19 @@
+Ninety-five point nine percent of the top million websites fail accessibility. And almost nobody sees it coming, because the failures are invisible. This is Fovea: the accessibility X-ray.
+
+Watch: forty-two violations stamp onto the exact elements that cause them. One number sums up the damage: the Access Score drops to sixty-six.
+
+Every chip is a real element, checked with real browser styles. No guessing. A search field with no label: screen reader users type into silence. A cart button with no name. A Help link that opens a new window without warning. A deal that the keyboard can never reach.
+
+But the fastest way to understand this is to become the user. Protanopia: the red badge melts into the green banner. Low vision: the page collapses into a tunnel of blur. Keyboard only: everything dims except the tab path, and the tabindex hack jumps to stop number one, breaking the order. Over a billion people live this every day.
+
+The score is not a guess either. It is a weighted model, and every deduction traces back to a rule and an element.
+
+And it is not just our demo. Paste any URL, and Fovea fetches the real page through a same-origin proxy, strips every script, renders it, and audits it live. This is debian dot org. A real production website, being X-rayed right now.
+
+Same rules, same math, on a site nobody scripted in advance. That is how you know the engine is honest.
+
+Back to the demo shop. Fresh session. Still sixty-six. Now watch.
+
+This is Live Fix Mode. One click per rule. Add the label. Name the button. Name the image. Fix the contrast. No reload, no external service. The page changes and re-scans instantly, and the score climbs with every click. Sixty-six. Eighty. Each repaired rule earns a copy-paste snippet for your real codebase, so the fix reaches production, not just this demo.
+
+Page-level fixes land last: language, title, pinch to zoom. Eighty-nine. One tool took this page from invisible to undeniable in under three minutes. Code and repo below.
