@@ -1,99 +1,174 @@
-# Fovea — the accessibility X-ray for the web
+# Fovea
 
-**95.9% of the world's top one million home pages have detectable WCAG 2 failures** — an average of 56 errors per page, and the number got *worse* last year ([WebAIM Million 2026](https://webaim.org/projects/million/)). That's a billion-dollar blind spot serving **1.3 billion people who live with a significant disability** ([WHO](https://www.who.int/news-room/fact-sheets/detail/disability-and-health)) — and it landed in front of a judge more than **4,000 times in 2024** as ADA web lawsuits ([UsableNet](https://www.usablenet.com/ada-web-accessibility-lawsuit-report)).
+### The accessibility X-ray for the web
 
-The problem isn't that developers don't care. It's that accessibility failures are **invisible**: a contrast ratio of 2.4:1 looks fine on your monitor, an unlabeled button looks fine to your mouse. You can't fix what you can't see.
+Fovea makes accessibility failures visible on the page where they happen—and lets you fix them live.
 
-**Fovea makes it visible — then fixes it, live, while you watch.**
+<p align="center">
+  <img src="docs/screenshot-xray.png" alt="Fovea X-ray view showing accessibility findings over a storefront page" width="920">
+</p>
 
-<p align="center"><img src="docs/screenshot-xray.png" alt="Fovea X-raying a shop page: violations stamped on the real elements, Access Score 66/100" width="820"></p>
+<p align="center">
+  <a href="https://youtu.be/dn-q3wNH4-8"><strong>Watch the 2:47 product demo</strong></a>
+  ·
+  <a href="#quick-start">Run it locally</a>
+  ·
+  <a href="#how-it-works">See how it works</a>
+</p>
 
-## What Fovea does
+> Accessibility tooling usually gives you a report. Fovea gives you a point of view: the real element, the reason it fails, the user impact, and a live before/after fix loop.
 
-Paste a URL (or open the built-in demo shop) and Fovea:
+## Why Fovea exists
 
-- **X-rays the real page** — violations are stamped directly onto the live elements: low contrast, missing labels, unnamed buttons, broken tab order, disabled pinch-to-zoom, and 19 more WCAG 2.2-aligned checks.
-- **Puts you in your users' shoes** — one click switches the page through protanopia, deuteranopia, tritanopia, and low-vision tunnel vision (real color-science matrices, not a hue-rotate filter).
-- **Shows the invisible** — a keyboard-only mode dims everything except the tab path with numbered focus stops, and a screen-reader transcript panel shows what assistive tech would read out, in reading order.
-- **Fixes what it finds, live** — click *Fix all* on a rule and Fovea edits the sandboxed copy, re-scans, and the **Access Score moves on screen** — a before/after record with copy-paste snippets for your real code.
-- **Audits the web at scale** — the same engine runs headlessly across a corpus of real homepages through a fetch → rewrite → render → analyze → aggregate pipeline. [See the corpus report](docs/screenshot-corpus.png) built from the committed results in `data/corpus/`.
+Accessibility problems are easy to miss when you inspect a page only as a developer. A low-contrast label can look acceptable on your monitor. An unnamed button works perfectly with a mouse. A broken keyboard path remains invisible until someone depends on it.
 
-Everything computes locally. No accounts, no API keys, no telemetry, no AI calls in the loop — the audit is deterministic math you can verify.
+Fovea turns those invisible failures into an explorable interface. Open the built-in demo shop or audit a URL, then inspect the page through the lens of contrast, color vision, keyboard navigation, reading order, and assistive-technology naming.
 
-## Try it in 2 commands
+## What it does
+
+- **X-rays the real page** — pins findings directly to live elements, including contrast, labels, names, focus order, headings, duplicate IDs, zoom settings, and other WCAG 2.2-aligned checks.
+- **Simulates user perspectives** — explore protanopia, deuteranopia, tritanopia, and low-vision tunnel vision with color-science matrices rather than a simple hue rotation.
+- **Reveals keyboard access** — dims the page and renders the actual tab path with numbered focus stops.
+- **Builds a reading-order transcript** — shows the content and accessible names a user agent is likely to encounter.
+- **Fixes findings live** — apply a rule to the sandboxed copy, re-scan it, watch the Access Score change, and copy the suggested fix into your real code.
+- **Audits at scale** — reuse the same engine in the headless crawler to fetch, rewrite, render, analyze, and aggregate a corpus of homepages.
+- **Stays local and deterministic** — no accounts, API keys, telemetry, or AI calls in the audit loop.
+
+## See it in action
+
+| X-ray overlay | Color and low-vision simulation |
+| --- | --- |
+| <img src="docs/screenshot-xray.png" alt="Accessibility findings pinned to elements in Fovea" width="440"> | <img src="docs/screenshot-simulation.png" alt="Fovea simulation modes for color vision and low vision" width="440"> |
+
+| Keyboard path | Live fix mode |
+| --- | --- |
+| <img src="docs/screenshot-keyboard.png" alt="Numbered keyboard focus path over the audited page" width="440"> | <img src="docs/screenshot-livefix.png" alt="Fovea live fix mode showing score improvement" width="440"> |
+
+**[Watch the full demo on YouTube →](https://youtu.be/dn-q3wNH4-8)**
+
+## Quick start
+
+### Requirements
+
+- Node.js **20 or newer**
+- npm
+
+### Run locally
 
 ```bash
+git clone https://github.com/Tulip9ZZZA/fovea.git
+cd fovea
 npm install
-npm start          # → http://localhost:3000
+npm start
 ```
 
-Then click **Audit the demo shop** — a realistic (fictional) store page carrying ~25 seeded failures across 21 rules — or paste any URL. Requires Node 20+. No environment variables, no `.env`, no configuration.
+Open [http://localhost:3000](http://localhost:3000), then choose **Audit the demo shop** or paste a URL.
 
-## Why it's different
+Fovea has no required environment variables and no `.env` setup. The server uses `PORT` when provided and defaults to `3000`.
 
-Most accessibility tools hand you a score and a list. Fovea's bet is that the missing piece is **experience**:
+## Development commands
 
-| | Static report tools | Fovea |
-|---|---|---|
-| Where findings live | A list of selectors | Stamped on the actual pixels, with the score attached |
-| Contrast math | Heuristic on raw HTML | Real `getComputedStyle()` values, ancestor alpha-compositing, honest "manual check" for gradients |
-| Understanding the user | Imagination | Simulation modes + tab path + reading-order transcript |
-| The fix | A recommendation | Applied to the live copy; the score moves, and the diff is your record |
-| Verification | — | 39 unit tests (WCAG golden values) + 13 browser end-to-end tests |
+```bash
+npm test          # 39 deterministic engine unit tests
+npm run test:e2e  # Playwright browser tests
+npm run crawl     # rebuild the committed corpus report
+```
 
-The engine is built to be *provably* right rather than impressively wrong: every rule operates on pure element snapshots, so the same code runs in the browser, in Node unit tests, and in the headless crawler.
+The browser tests and crawler require a Playwright browser installation. If Chromium is not already available:
+
+```bash
+npx playwright install chromium
+```
 
 ## How it works
 
-```
- ┌────────────────────────────────────────────────────────────────────┐
- │  URL → same-origin proxy (SSRF-guarded fetch, scripts stripped,    │
- │        assets rewritten) OR paste-HTML OR built-in demo shop       │
- └──────────────────────────────┬─────────────────────────────────────┘
-                                ▼
-              sandboxed iframe (allow-same-origin, no scripts)
-                                ▼
-   scanner.js — one DOM walk → element snapshots (tag, attrs, geometry,
-                computed color styles, visibility, ancestor bg chain)
-                                ▼
-   ┌────────────── pure, unit-tested engine ──────────────┐
-   │ rules.js (24 WCAG-aligned rules)   taborder.js       │
-   │ color.js (WCAG luminance + contrast) readingorder.js │
-   │ score.js (Access Score)            sim.js (matrices) │
-   └──────────────────────────────────────────────────────┘
-                                ▼
-        X-ray overlay · simulations · keyboard path · transcript
-        Live Fix Mode (sandboxed DOM edit → re-scan → score delta)
-                                ▼
-     bin/crawl.js — the same scan headlessly across real homepages
-        → data/corpus/summary.json → the corpus report page
-```
-
-**The Access Score** starts at 100 and subtracts one weighted deduction per rule with open violations — severity (critical 6 · serious 3 · moderate 1.2 · minor 0.4) × scope (page-wide ×1.5 · interactive ×1.1 · content ×1/×0.7), first instance at half weight. It's a deterministic triage signal, not a certification, and the ⓘ button in the app explains every term.
-
-## What Fovea does *not* do (honesty box)
-
-- It audits **static markup and computed styles**. Scripts are stripped from audited pages, so client-side-rendered app states are out of scope (the proxy tells you when a site degrades — paste-HTML mode is the fallback).
-- The disability simulations are **awareness approximations**, not clinical tools; the transcript is a reading-order estimate, not a screen reader.
-- Live Fix Mode edits the **in-memory copy** to demonstrate the fix and move the score; the copy-paste snippets are what you apply to real code.
-- It does not certify WCAG conformance — it catches a meaningful, well-defined slice (~24 rules) and says exactly which ones in the app's About panel.
-
-## Development
-
-```bash
-npm install
-npm start              # run the app
-npm test               # 39 engine unit tests (node:test, no browser needed)
-npm run test:e2e       # 13 Playwright end-to-end specs (needs: npx playwright install chromium)
-npm run crawl          # rebuild the web corpus report (same requirement)
+```text
+URL ──► SSRF-guarded same-origin proxy
+          │  fetches HTML, strips scripts, rewrites assets
+          ▼
+      sandboxed iframe
+          │
+          ▼
+      scanner.js ──► element snapshots
+          │           tag, attributes, geometry, styles,
+          │           visibility, backgrounds, accessible context
+          ▼
+      pure audit engine
+          ├── rules.js          WCAG-aligned rule checks
+          ├── color.js          luminance, contrast, compositing
+          ├── taborder.js       keyboard focus order
+          ├── readingorder.js   transcript order and naming
+          ├── score.js          deterministic Access Score
+          └── sim.js            color-vision simulation matrices
+          ▼
+      X-ray · simulations · keyboard path · transcript · live fixes
+          │
+          ▼
+      bin/crawl.js ──► committed corpus summary and report
 ```
 
-Project layout: `src/engine/` (pure audit engine), `src/` (app pages), `lib/proxy.js` (same-origin proxy), `demo/` (NovaMart demo shop), `bin/crawl.js` (pipeline), `data/corpus/` (committed results), `tests/` (unit + e2e). Design decisions and deliberate limitations are documented in [DECISIONS.md](DECISIONS.md); dependency licenses in [CREDITS.md](CREDITS.md).
+The engine is intentionally made of pure, testable functions. The same logic can run in the browser, in Node unit tests, and in the headless crawler.
+
+### Access Score
+
+The score starts at 100 and applies weighted deductions for open violations. Weighting considers severity, scope, and repeated instances of the same rule. It is a deterministic triage signal—not a WCAG certification—and the app's score explanation describes how each term contributes.
+
+## Project map
+
+```text
+src/
+├── engine/       Pure audit engine: rules, color, score, tab order, reading order, simulations
+├── index.html    Landing page
+├── workspace.*   Interactive audit workspace
+└── batch.*       Corpus report UI
+
+server.js         Express server, static app, demo routes, proxy, corpus API
+lib/proxy.js      Same-origin fetch proxy with SSRF protections
+bin/crawl.js      Headless corpus pipeline
+demo/             Fictional NovaMart storefront with seeded failures
+data/corpus/     Committed corpus results
+scripts/          Screenshot and demo automation
+tests/            Unit and Playwright end-to-end tests
+docs/             Screenshots, demo script, voiceover, and supporting material
+```
+
+## Honest scope
+
+Fovea is designed to make a meaningful, inspectable slice of accessibility easier to understand. It is not a conformance certification tool.
+
+- Audits cover static markup and computed styles. Audited scripts are stripped; client-rendered states are out of scope for the proxy path.
+- Paste-HTML mode is available when you need to inspect markup directly.
+- Disability simulations are awareness aids, not clinical tools.
+- The transcript is a reading-order estimate, not a replacement for testing with a screen reader.
+- Live Fix Mode edits only the in-memory sandbox. Use the generated snippets in your real code.
+- The rule set is deliberately documented in the app's About panel and source rather than presented as universal coverage.
+
+## Technical notes
+
+- Node.js and Express
+- Browser UI with vanilla HTML, CSS, and JavaScript
+- Playwright for browser automation and end-to-end coverage
+- WCAG luminance and contrast calculations with published golden-value tests
+- Color-vision simulation matrices based on Machado, Oliveira & Fernandes (2009)
+- No runtime AI dependency
+
+Design decisions and deliberate limitations live in [DECISIONS.md](DECISIONS.md). Third-party attributions and dependency licenses live in [CREDITS.md](CREDITS.md). Compliance evidence is collected in [compliance/](compliance/).
+
+## Contributing
+
+Issues and pull requests are welcome. Before opening a change:
+
+1. Install dependencies with `npm install`.
+2. Run `npm test`.
+3. Run the relevant Playwright tests when changing browser behavior.
+4. Keep changes focused and explain the user-facing impact in the pull request.
+
+Please avoid presenting Fovea as a certification or adding claims that cannot be reproduced from the repository.
 
 ## How AI was used
 
-Fovea was built during Next Byte Hacks V5 with AI coding agents (architecture specified by the team, every file reviewed and tested before landing). All rule logic, color math, scoring and UI are original work — verified against published WCAG formulas and unit-tested golden values, with the color-vision matrices from the standard Machado, Oliveira & Fernandes (2009) model cited in `src/engine/sim.js`. Nothing was copied from tutorials, templates, or other projects; the full disclosure also appears in the Devpost submission.
+Fovea was built during Next Byte Hacks V5 with AI coding agents. The team specified the architecture, reviewed the files, and tested the implementation before landing changes. The rule logic, color math, scoring, and UI are original work in this repository; the project's disclosure and supporting evidence are documented in [devpost.md](devpost.md) and [compliance/](compliance/).
 
 ## License
 
-MIT — see [LICENSE](LICENSE). Built during Next Byte Hacks V5, October–November 2026.
+Released under the [MIT License](LICENSE). Built during Next Byte Hacks V5, October–November 2026.
