@@ -2,6 +2,8 @@
 
 ### The accessibility X-ray for the web
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Demo](https://img.shields.io/badge/Demo-Watch%20on%20YouTube-red?logo=youtube)](https://youtu.be/dn-q3wNH4-8)
+
 Fovea makes accessibility failures visible on the page where they happen—and lets you fix them live.
 
 <p align="center">
